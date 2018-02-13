@@ -1,0 +1,7 @@
+<p>
+  <ng-container
+    *ngFor="let pool of pools"
+    >
+    <a [routerLink]="['/details', pool.id]">{{ pool.name }}</a>
+  </ng-container>
+</p>
