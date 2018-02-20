@@ -1,38 +1,55 @@
-import {
-    Injectable
-} from '@angular/core';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Response } from "@angular/http";
+import { Observable } from "rxjs/Rx";
+import 'rxjs/add/operator/map';
 
-import {
-    IPool
-} from "../interfaces/pool.interface";
+import { IPool } from "../interfaces/pool.interface";
 
 @Injectable()
 export class PoolService {
 
-    constructor() {}
+    api_url = "http://localhost:3000";
+    poolUrl = `${this.api_url}/api/pools`;
 
-    private mockPoolList: IPool[] = [
-        {
-            id: 1,
-            name: "Mountains Trip",
-        },
-        {
-            id: 2,
-            name: "Matt's Birthday Gathering",
-        },
-    ];
+    constructor(
+        private http: HttpClient
+    ) {}
 
-    public getPoolList(): Promise <IPool[]> {
-        return new Promise((resolve, reject) => {
-            resolve(this.mockPoolList);
-        });
+    public getPoolList(): Observable<IPool[]> {
+        return this.http.get(this.poolUrl)
+            .map( (response) => {
+                console.log(response);
+                return response["data"].docs as IPool[];
+            });
     }
 
-    public getPool(id: number): Promise<IPool> {
-        const pool: IPool = this.mockPoolList.filter( (pool) => pool.id === id)[0];
-        return new Promise((resolve, reject) => {
-            resolve(pool);
-        });
+    public getPool(id: string): Observable<IPool> {
+        return this.http.get(`${this.poolUrl}/${id}`)
+            .map((response) => {
+                return response["data"] as IPool;
+            });
+    }
+
+    public addPool(pool: IPool): Observable<IPool> {
+        return this.http.post(this.poolUrl, pool)
+            .map( (response) => {
+                return response["data"];
+            });
+    }
+
+    public updatePool(pool: IPool): Observable<IPool> {
+        return this.http.put(`${this.poolUrl}/${pool._id}`, pool)
+            .map((response) => {
+                return response["data"];
+            });
+    }
+
+    public deletePool(id: string): Observable<null> {
+        return this.http.delete(`${this.poolUrl}/${id}`)
+            .map((response) => {
+                return response["data"];
+            });
     }
 
 }

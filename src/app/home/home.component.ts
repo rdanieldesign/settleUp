@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from "rxjs/Subscription";
 
 import { PoolService } from "../services/pool.service";
 
@@ -12,16 +13,21 @@ import { IPool } from "../interfaces/pool.interface";
 })
 export class HomeComponent implements OnInit {
 
-  public pools: IPool[];
+  pools: IPool[];
+  private poolSub: Subscription;
 
   constructor(
     private poolService: PoolService
   ) {}
 
   ngOnInit() {
-    this.poolService.getPoolList().then((pools: IPool[]): void => {
+    this.poolSub = this.poolService.getPoolList().subscribe((pools: IPool[]): void => {
       this.pools = pools;
     });
+  }
+
+  ngOnDestroy() {
+    this.poolSub.unsubscribe();
   }
 
 }

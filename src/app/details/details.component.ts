@@ -16,7 +16,7 @@ export class DetailsComponent implements OnInit {
   
   public pool: IPool;
   private routeSub: Subscription;
-  private poolId: number;
+  private poolId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,10 +24,9 @@ export class DetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.routeSub = this.route.params.subscribe( (params) => this.poolId = parseInt(params.id, 10));
-    this.poolService.getPool(this.poolId).then( (pool: IPool) => {
+    this.routeSub = this.route.params.subscribe( (params) => this.poolId = params.id);
+    this.poolService.getPool(this.poolId).subscribe( (pool: IPool) => {
       this.pool = pool;
-      console.log(this.pool);
     });
   }
 
