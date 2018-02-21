@@ -14,7 +14,8 @@ import { IPool } from "../interfaces/pool.interface";
 })
 export class DetailsComponent implements OnInit {
   
-  public pool: IPool;
+  pool: IPool;
+  ready: boolean = false;
   private routeSub: Subscription;
   private poolId: string;
 
@@ -27,6 +28,7 @@ export class DetailsComponent implements OnInit {
     this.routeSub = this.route.params.subscribe( (params) => this.poolId = params.id);
     this.poolService.getPool(this.poolId).subscribe( (pool: IPool) => {
       this.pool = pool;
+      this.ready = true;
     });
   }
 

@@ -1,7 +1,18 @@
-<p>
-  <ng-container
-    *ngFor="let pool of pools"
+<ng-container *ngFor="let pool of pools">
+  <a [routerLink]="['/details', pool._id]">{{ pool.name }}</a>
+  <su-button
+    [buttonText]="'X'"
+    (handleClick)="deletePool(pool._id)"
     >
-    <a [routerLink]="['/details', pool._id]">{{ pool.name }}</a>
-  </ng-container>
-</p>
+  </su-button>
+</ng-container>
+<su-input
+  [model]="newPoolName"
+  (handleChange)="setNewPoolName($event.target.value)"
+  >
+</su-input>
+<su-button
+  [buttonText]="'Add Pool'"
+  (handleClick)="addPool()"
+  >
+</su-button>
