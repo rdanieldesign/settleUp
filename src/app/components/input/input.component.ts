@@ -10,6 +10,8 @@ export class InputComponent {
   constructor() { }
 
   @Input() model: string;
+  @Input() type: string;
+  @Input() identifier: string;
   @Output() handleChange = new EventEmitter();
 
 }

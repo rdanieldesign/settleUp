@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -13,15 +13,15 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { DetailsComponent } from './details/details.component';
 import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/input/input.component';
+import { LabelledInputComponent } from './components/labelled-input/labelled-input.component';
 
-const appRoutes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'details/:id', component: DetailsComponent },
-  { path: '**', component: NotFoundComponent },
-];
+import { AuthenticationService } from "./auth/services/authentication.service";
+import { TokenService } from "./auth/services/token.service";
+import { AuthGuardService } from "./auth/services/auth-guard.service";
 
+import { TokenInterceptor } from "./auth/token.interceptor";
+
+import { routes } from "./app.routes";
 
 @NgModule({
   declarations: [
@@ -33,18 +33,28 @@ const appRoutes: Routes = [
     NotFoundComponent,
     DetailsComponent,
     ButtonComponent,
-    InputComponent
+    InputComponent,
+    LabelledInputComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(
-      appRoutes,
+      routes,
       // { enableTracing: true } // debugging purposes only
     )
   ],
-  providers: [],
+  providers: [
+    AuthenticationService,
+    TokenService,
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

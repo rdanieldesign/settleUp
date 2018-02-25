@@ -1,4 +1,9 @@
 <header>
-  <a routerLink="/home">Home</a>
-  <a routerLink="/login">Login</a>
+  <h3>Settle Up</h3>
+  <a *ngIf="currentUser" routerLink="/home">Home</a>
+
+  <span *ngIf="currentUser">
+    <span>Hello, {{currentUser.name}}</span>
+    <a (click)="logout()">Log Out</a>
+  </span>
 </header>

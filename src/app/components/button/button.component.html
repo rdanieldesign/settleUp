@@ -1,4 +1,5 @@
 <button
+  [disabled]="isDisabled"
   (click)="handleClick.emit($event)"
   >
   {{buttonText}}

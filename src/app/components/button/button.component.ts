@@ -10,6 +10,7 @@ export class ButtonComponent {
   constructor() { }
 
   @Input() buttonText;
+  @Input() isDisabled;
   @Output() handleClick = new EventEmitter();
 
 }

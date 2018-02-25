@@ -1,4 +1,6 @@
 <input
+  id="identifier"
   [ngModel]="model"
+  [type]="type"
   (keyup)='handleChange.emit($event)'
 />

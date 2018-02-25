@@ -1,0 +1,10 @@
+<div>
+  <label for="{{identifier}}">{{label}}</label>
+  <su-input
+    [identifier]="identifier"
+    [model]="model"
+    [type]="inputType"
+    (handleChange)="handleChange.emit($event)"
+    >
+  </su-input>
+</div>

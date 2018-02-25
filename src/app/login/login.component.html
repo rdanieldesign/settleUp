@@ -1,3 +1,21 @@
-<p>
-  login works!
-</p>
+<su-labelled-input
+  [model]="email"
+  [label]="'Email'"
+  [identifier]="'login-email'"
+  (handleChange)="setEmail($event.target.value)"
+  >
+</su-labelled-input>
+<su-labelled-input
+  [model]="password"
+  [label]="'Password'"
+  [identifier]="'login-password'"
+  [inputType]="'password'"
+  (handleChange)="setPassword($event.target.value)"
+  >
+</su-labelled-input>
+<su-button
+  [buttonText]="'Log In'"
+  [isDisabled]="!loginEnabled"
+  (handleClick)="login()"
+  >
+</su-button>

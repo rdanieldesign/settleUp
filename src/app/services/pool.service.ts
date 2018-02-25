@@ -13,7 +13,7 @@ export class PoolService {
     poolUrl = `${this.api_url}/api/pools`;
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
     ) {}
 
     public getPoolList(): Observable<IPool[]> {
