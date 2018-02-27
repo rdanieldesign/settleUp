@@ -1,0 +1,50 @@
+@import "./color.variable";
+
+// text styles
+
+.text-white {
+    color: $white;
+}
+
+.text-dark-red {
+    color: $dark-red;
+}
+
+// background styles
+
+.background-red {
+    background-color: $red;
+}
+
+.background-blue {
+	background-color: $blue;
+}
+
+.background-grey {
+	background-color: $grey;
+}
+
+.background-white {
+	background-color: $white;
+}
+
+
+// border
+
+.border-grey {
+    border: 1px solid $grey;
+}
+
+.border-bottom-grey {
+	border-bottom: 1px solid $grey;
+}
+
+
+.border-dark-blue {
+	border: 1px solid $dark-blue;
+}
+
+.border-dark-red {
+	border: 1px solid $dark-red;
+}
+

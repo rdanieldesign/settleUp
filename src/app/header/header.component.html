@@ -1,9 +1,13 @@
-<header>
-  <h3>Settle Up</h3>
-  <a *ngIf="currentUser" routerLink="/home">Home</a>
+<header class="row-nowrap padding-1 background-red">
+  <h3
+    class="text-white margin-right-auto"
+    routerLink="/home"
+    >
+    Settle Up
+  </h3>
 
   <span *ngIf="currentUser">
-    <span>Hello, {{currentUser.name}}</span>
-    <a (click)="logout()">Log Out</a>
+    <span class="text-white">Hello, {{currentUser.name}}</span>
+    <a class="text-dark-red text-small" (click)="logout()">Sign Out</a>
   </span>
 </header>

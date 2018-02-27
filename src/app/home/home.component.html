@@ -1,18 +1,44 @@
-<ng-container *ngFor="let pool of pools">
-  <a [routerLink]="['/details', pool._id]">{{ pool.name }}</a>
-  <su-button
-    [buttonText]="'X'"
-    (handleClick)="deletePool(pool._id)"
+<div class="home-wrapper padding-1">
+  <section
+    class="pool-list margin-bottom-2"
+    *ngIf="pools && pools.length"
     >
-  </su-button>
-</ng-container>
-<su-input
-  [model]="newPoolName"
-  (handleChange)="setNewPoolName($event.target.value)"
-  >
-</su-input>
-<su-button
-  [buttonText]="'Add Pool'"
-  (handleClick)="addPool()"
-  >
-</su-button>
+    <h2 class="margin-bottom-1">My Active Pools</h2>
+    <ul>
+      <li
+        class="pool-list__item row-nowrap align-items-center border-bottom-grey"
+        *ngFor="let pool of pools">
+        <a
+          class="flex-stretch-horizontal"
+          [routerLink]="['/details', pool._id]"
+          >
+          {{ pool.name }}
+        </a>
+        <su-button
+          [buttonText]="'x'"
+          [type]="'danger'"
+          (handleClick)="deletePool(pool._id)"
+          >
+        </su-button>
+      </li>
+    </ul>
+  </section>
+  
+  <section class="pool-add">
+    <h2 class="margin-bottom-1">Start a New Pool</h2>
+    <form class="row-nowrap">
+      <su-input
+        class="flex-stretch-horizontal"
+        [model]="newPoolName"
+        (handleChange)="setNewPoolName($event.target.value)"
+        >
+      </su-input>
+      <su-button
+        [buttonText]="'Add Pool'"
+        [type]="'primary'"
+        (handleClick)="addPool()"
+        >
+      </su-button>
+    </form>
+  </section>
+</div>

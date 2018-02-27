@@ -1,4 +1,10 @@
 <button
+  [ngClass]="{
+    'text-white': type,
+    'background-blue border-dark-blue': type === 'primary',
+    'background-red border-dark-red': type === 'danger',
+    'background-white': !type
+  }"
   [disabled]="isDisabled"
   (click)="handleClick.emit($event)"
   >

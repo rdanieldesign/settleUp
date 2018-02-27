@@ -1,0 +1,16 @@
+@import "../shared/styles/color.variable";
+
+.home-wrapper {
+    display: grid;
+}
+
+.pool-list {
+
+    &__item:first-child {
+        border-top: 1px solid $grey;
+    }
+}
+
+.pool-home {
+
+}

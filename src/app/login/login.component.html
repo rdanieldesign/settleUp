@@ -1,21 +1,26 @@
-<su-labelled-input
-  [model]="email"
-  [label]="'Email'"
-  [identifier]="'login-email'"
-  (handleChange)="setEmail($event.target.value)"
-  >
-</su-labelled-input>
-<su-labelled-input
-  [model]="password"
-  [label]="'Password'"
-  [identifier]="'login-password'"
-  [inputType]="'password'"
-  (handleChange)="setPassword($event.target.value)"
-  >
-</su-labelled-input>
-<su-button
-  [buttonText]="'Log In'"
-  [isDisabled]="!loginEnabled"
-  (handleClick)="login()"
-  >
-</su-button>
+<section class="padding-1">
+  <su-labelled-input
+    class="margin-bottom-1 block"
+    [model]="email"
+    [label]="'Email'"
+    [identifier]="'login-email'"
+    (handleChange)="setEmail($event.target.value)"
+    >
+  </su-labelled-input>
+  <su-labelled-input
+    class="margin-bottom-1 block"
+    [model]="password"
+    [label]="'Password'"
+    [identifier]="'login-password'"
+    [inputType]="'password'"
+    (handleChange)="setPassword($event.target.value)"
+    >
+  </su-labelled-input>
+  <su-button
+    [buttonText]="'Log In'"
+    [isDisabled]="!loginEnabled"
+    [type]="'primary'"
+    (handleClick)="login()"
+    >
+  </su-button>
+</section>
