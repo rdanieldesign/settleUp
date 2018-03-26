@@ -5,4 +5,5 @@ export interface IPool {
 
 export interface INewPool {
     name: string;
+    creator: string;
 }

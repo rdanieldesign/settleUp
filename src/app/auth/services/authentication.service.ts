@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 
 import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { map } from "rxjs/operators/map";
 
 import { TokenService } from "./token.service";
@@ -13,14 +13,22 @@ import { ITokenPayload, ITokenResponse, IUserDetails } from "../../interfaces/au
 @Injectable()
 export class AuthenticationService {
 
-  private api_url: string = "http://localhost:3000/api";
-  private currentUser: Subject<IUserDetails> = new Subject();
+  private api_url = "http://localhost:3000/api";
+  private _currentUser: BehaviorSubject<IUserDetails> = new BehaviorSubject(null);
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private tokenService: TokenService,
   ) {}
+
+  get currentUser$(): BehaviorSubject<IUserDetails> {
+    return this._currentUser;
+  }
+
+  set currentUser$(user) {
+    throw new Error("Cannot set current user object directly");
+  }
 
   register(user: ITokenPayload): Observable<any> {
     return this.http.post(`${this.api_url}/register`, user)
@@ -37,7 +45,7 @@ export class AuthenticationService {
       .pipe(map((data: ITokenResponse) => {
         if (data.token) {
           this.tokenService.authToken = data.token;
-          this.currentUser.next(this.getUserDetails());
+          this._currentUser.next(this.getUserDetails());
         }
         return data;
       }));
@@ -46,22 +54,18 @@ export class AuthenticationService {
   logout(): void {
     this.tokenService.removeAuthToken();
     this.router.navigateByUrl("/login");
-    this.currentUser.next();
+    this._currentUser.next(null);
   }
 
   isLoggedIn(): boolean {
     const user = this.getUserDetails();
     if (user) {
-      this.currentUser.next(user);
+      this._currentUser.next(user);
       return user.exp > Date.now() / 1000;
     } else {
-      this.currentUser.next();
+      this._currentUser.next(null);
       return false;
     }
-  }
-
-  getCurrentUser(): Observable<IUserDetails> {
-    return this.currentUser.asObservable();
   }
 
   private getUserDetails(): IUserDetails {

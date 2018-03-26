@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { LabelledInputComponent } from './labelled-input.component';
+import { LabelledInputComponent } from "./labelled-input.component";
 
-describe('LabelledInputComponent', () => {
+describe("LabelledInputComponent", () => {
   let component: LabelledInputComponent;
   let fixture: ComponentFixture<LabelledInputComponent>;
 
@@ -19,7 +19,7 @@ describe('LabelledInputComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

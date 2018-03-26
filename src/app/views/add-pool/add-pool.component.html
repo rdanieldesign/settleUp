@@ -1,0 +1,22 @@
+<h2 class="margin-bottom-1">Start a New Pool</h2>
+<form class="row-nowrap">
+  <su-input
+    class="flex-stretch-horizontal"
+    [model]="newPoolName"
+    (handleChange)="setNewPoolName($event.target.value)"
+    >
+  </su-input>
+  <su-typeahead
+    [option$]="friendOption$"
+    [model$]="friendSearch$"
+    [labelKey]="'name'"
+    (selectOption)="addFriend($event)"
+    >
+  </su-typeahead>
+  <su-button
+    [buttonText]="'Add Pool'"
+    [type]="'primary'"
+    (handleClick)="addPool()"
+    >
+  </su-button>
+</form>

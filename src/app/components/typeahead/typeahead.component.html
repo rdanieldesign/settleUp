@@ -1,0 +1,15 @@
+<div>
+  <su-input
+    [model]="inputValue"
+    (handleChange)="handleTextChange($event.target.value)"
+    >
+  </su-input>
+  <ul>
+    <li
+      *ngFor="let option of option$ | async"
+      [innerText]="option[labelKey]"
+      (click)="handleOptionClick(option)"
+      >
+    </li>
+  </ul>
+</div>

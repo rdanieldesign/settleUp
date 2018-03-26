@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs/Subscription";
 
-import { PoolService } from "../services/pool.service";
+import { PoolService } from "../../services/pool.service";
 
-import { IPool } from "../interfaces/pool.interface";
+import { IPool } from "../../interfaces/pool.interface";
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css'],
+  selector: "app-details",
+  templateUrl: "./details.component.html",
+  styleUrls: ["./details.component.css"],
   providers: [ PoolService ],
 })
 export class DetailsComponent implements OnInit {
-  
+
   pool: IPool;
-  ready: boolean = false;
+  ready = false;
   private routeSub: Subscription;
   private poolId: string;
 

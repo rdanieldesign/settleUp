@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
 
-import { AuthenticationService } from "../auth/services/authentication.service";
+import { AuthenticationService } from "../../auth/services/authentication.service";
 
 @Component({
   selector: "app-login",
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   email: string;
   password: string;
-  loginEnabled: boolean = false;
+  loginEnabled = false;
 
   constructor(
     private authService: AuthenticationService,
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl("/home");
     });
   }
-  
+
   private getIsLoginEnabled(): boolean {
     return Boolean(this.password && this.email);
   }

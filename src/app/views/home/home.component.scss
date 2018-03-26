@@ -1,4 +1,4 @@
-@import "../shared/styles/color.variable";
+@import "../../shared/styles/color.variable";
 
 .home-wrapper {
     display: grid;
@@ -9,8 +9,4 @@
     &__item:first-child {
         border-top: 1px solid $grey;
     }
-}
-
-.pool-home {
-
 }
